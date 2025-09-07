@@ -1,0 +1,13 @@
+/* .navbar-brand {
+  text-transform: uppercase;
+} */
+
+.navbar-brand,
+.nav-link {
+  color: #fff;
+}
+
+.navbar-brand:hover,
+.nav-link:hover {
+  color: #fff;
+}

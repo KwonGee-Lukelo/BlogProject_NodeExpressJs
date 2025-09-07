@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Mon Blog</title>
+  </head>
+
+  <body>
+    <main>
+      <%- include("partials/header.ejs") %>
+      
+      <div class="container">
+        <div class="row">
+            <h1 class="text-center">Redigez votre article</h1>
+
+            <form action="submit" method="POST">
+                <div class="mb-3">
+                    <label for="monTitre">Titre</label>
+                    <input type="text" class="form-control" name="titre" id="monTitre">
+                </div>
+
+                <div class="mb-3">
+                    <label for="monArticle">Article</label>
+                    <textarea type="text" class="form-control" name="article" id="monArticle" rows="10"></textarea>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-success">Publier</button>
+                </div>
+            </form>
+        </div>
+
+      <%- include("partials/footer.ejs") %>
+    </main>
+  </body>
+</html>
