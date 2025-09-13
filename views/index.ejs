@@ -13,24 +13,37 @@
       <%- include("partials/header.ejs") %>
       <div class="container contMain">
         <% if(articlePublier.length > 0) { %>
-          <div class="row">
-            <% articlePublier.forEach(article => { %>
-              <div class="col-lg-4 col-md-6">
-                <div class="card">
-                  <img src="" alt="" class="card-img-top">
-                  <div class="card-body">
-                    <h5 class="card-title text-uppercase mb-3"> <%= article.titreArticle %> </h5>
-                    <p class="card-text justify"> <%= article.contenuArticle %> </p>
-                    <small>Auteur : <%= article.auteurArticle %> </small>
-                    <small>Publier le : <%= article.dateFormater %> </small>
-                    <small>A : <% article.heureFormater %> </small>
-                  </div>
+        <div class="row">
+          <% articlePublier.forEach(article => { %>
+          <div class="col-lg-4 col-md-6">
+            <div class="card">
+              <img src="" alt="" class="card-img-top" />
+              <div class="card-body">
+                <h5 class="card-title text-uppercase mb-3">
+                  <%= article.titreArticle %>
+                </h5>
+
+                <p class="card-text justify"><%= article.contenuArticle %></p>
+                <small>Auteur : <%= article.auteurArticle %> </small>
+                <small>Publier le : <%= article.dateFormater %> </small>
+                <small>A : <% article.heureFormater %> </small>
+
+                <div class="button d-flex justify-content-start mt-3">
+                  <form action="/delete/<%= article.indexArticle %>" method="POST">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                  </form>
+
+                  <form action="/delete/<%= article.indexArticle %>" method="POST">
+                    <button type="submit" class="btn btn-warning mx-3">Modifier</button>
+                  </form>
                 </div>
               </div>
-            <% }) %>
+            </div>
           </div>
+          <% }) %>
+        </div>
         <% } else{ %>
-          <h2 class="text-center mb-5">Créer un article</h2>
+        <h2 class="text-center mb-5">Créer un article</h2>
         <% } %>
       </div>
       <%- include("partials/footer.ejs") %>
