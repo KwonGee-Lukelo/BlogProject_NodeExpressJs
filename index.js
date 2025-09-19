@@ -76,6 +76,18 @@ app.get("/edit/:indexArticle", (req, res) => {
   res.render("modifier.ejs", { article, index });
 });
 
+//enregistrer modification article
+app.post("/edit/:indexArticle", (req, res) => {
+  const index = Math.floor(Math.random() * tabArticle.length);
+  if (tabArticle[index]) {
+    tabArticle[index].titreArticle = req.body.titre;
+    tabArticle[index].contenuArticle = req.body.article;
+    tabArticle[index].auteurArticle = req.body.auteur;
+    // Tu peux aussi mettre à jour la date/heure si tu veux
+  }
+  res.redirect("/");
+});
+
 app.listen(port, () => {
   console.log(`Votre Serveur tourne sur le port ${port}`);
 });
