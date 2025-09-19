@@ -4,14 +4,14 @@ import bodyParser from "body-parser";
 const app = express();
 const port = 3000;
 
-let tabArticle =[];
+let tabArticle = [];
 
 //Middleware Static Files d'Express
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extend: true }));
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", { articlePublier : tabArticle});
+  res.render("index.ejs", { articlePublier: tabArticle });
 });
 
 app.get("/publier", (req, res) => {
@@ -20,9 +20,11 @@ app.get("/publier", (req, res) => {
 
 app.post("/submit", (req, res) => {
   console.log(req.body);
+  let indexArticle = req.body["index"];
   let titreArticle = req.body["titre"];
   let contenuArticle = req.body["article"];
-  const date = new Date()
+  let auteurArticle = req.body["auteur"];
+  const date = new Date();
 
   //recuperation des éléments constitutifs d'une date
   let jour = date.getDate();
@@ -35,19 +37,43 @@ app.post("/submit", (req, res) => {
 
   //Formatage de la date et de l'heure
   let dateFormater = `${jour}/${mois}/${annee}`;
-  let heureFormater = `${heure}:${minute}`
+  let heureFormater = `${heure}:${minute}`;
 
   //objet article
   let nouvelArticle = {
+    indexArticle,
     titreArticle,
     contenuArticle,
+    auteurArticle,
     dateFormater,
-    heureFormater
-  }
+    heureFormater,
+  };
 
   tabArticle.push(nouvelArticle);
 
-  res.redirect("/")
+  res.redirect("/");
+});
+
+//supprimer article
+app.post("/delete/:indexArticle", (req, res) => {
+  //const numero = parseInt(req.params.indexArticle, 10); //On prend le parametre de notre url qui constitue notre requette, on trouve la propriete indexArticle
+  const index = Math.floor(Math.random() * tabArticle.length);
+  if (!isNaN(index) && index >= 0) {
+    tabArticle.splice(index, 1);
+  }
+  res.redirect("/");
+
+  console.log(index);
+});
+
+//modifier article
+app.get("/edit/:indexArticle", (req, res) => {
+  const index = Math.floor(Math.random() * tabArticle.length);
+  const article = tabArticle[index];
+  if (!article) {
+    return res.redirect("/");
+  }
+  res.render("modifier.ejs", { article, index });
 });
 
 app.listen(port, () => {

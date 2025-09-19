@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Mon Blog</title>
+  </head>
+
+  <body>
+    <main>
+      <%- include("partials/header.ejs") %>
+      
+      <div class="container">
+        <div class="row">
+            <h1 class="text-center mt-3 mb-4">Redigez votre article</h1>
+
+            <form action="/edit/<%= index %>" method="POST">
+                <div class="mb-3">
+                    <label for="monTitre">Numero article</label>
+                    <input type="number" class="form-control"  name="index" id="monTitre" value="<%= article.indexArticle %>" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="monTitre">Titre</label>
+                    <input type="text" class="form-control is-invalid"  name="titre" id="monTitre"  value="<%= article.titreArticle %>" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="monAuteur">Auteur</label>
+                    <input type="text" class="form-control" name="auteur" id="monAuteur" value="<%= article.auteurArticle %>" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="monArticle">Article</label>
+                    <textarea type="text" class="form-control" aria-describedby="validationServer" name="article" id="monArticle" rows="10" required><%= article.contenuArticle %></textarea>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-success">Enregister</button>
+                </div>
+            </form>
+        </div>
+
+      <%- include("partials/footer.ejs") %>
+    </main>
+  </body>
+</html>
